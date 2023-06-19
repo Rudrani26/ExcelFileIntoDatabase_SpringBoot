@@ -1,0 +1,103 @@
+<!--&lt;!&ndash;<%@ page language="java" contentType="text/html; charset=ISO-8859-1"&ndash;&gt;-->
+<!--&lt;!&ndash;pageEncoding="ISO-8859-1"%>&ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"  xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Excel File</title>-->
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="./UploadPage.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
+<!--&lt;!&ndash;    <script defer src="./Index.js"></script>&ndash;&gt;-->
+
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <form id="form" action="uploadFile" method="post" enctype="multipart/form-data">-->
+<!--        <h1>Excel to Database</h1>-->
+<!--        <div class="input-control">-->
+<!--            <label for="fileUpload">Upload File: </label>-->
+<!--            <input id="fileUpload" name="fileUpload" type="file">-->
+<!--            </div>-->
+<!--        <button type="submit">Upload</button>-->
+<!--        -->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel File</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./UploadPage.css">
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
+<!--    <script defer src="./Index.js"></script>-->
+</head>
+
+<body>
+<div class="container">
+    <form id="form" action="uploadFile" method="post" enctype="multipart/form-data">
+        <h1>Excel to Database</h1>
+        <div class="input-control">
+            <label for="fileUpload">Upload File: </label>
+            <input id="fileUpload" name="fileUpload" type="file" required >
+            <span class="fileTypeError" th:text="${fileType}"></span>
+        </div>
+        <button type="submit">Upload</button>
+
+
+<!--        <p>Total Records: <span id="totalRecords"></span></p>-->
+<!--        <p>List Errors Length: <span id="ListErrorsLength"></span></p>-->
+<!--        <p>Excel List Length: <span id="excelListLength"></span></p>-->
+<!--        <p>Errors: <span id="errors"></span></p>-->
+<!--        <p>List Errors: <span id="ListErrors"></span></p>-->
+
+
+    <div id="errors"  class="flash-message">
+        Total Records : <p id="totalRecords" th:text="${totalRecords}"></p>
+        Records Successfully saved : <p id="excelListLength" th:text="${excelListLength}"></p>
+        Records Failed : <p id="ListErrorsLength" th:text="${ListErrorsLength}"></p>
+        <h3>Error Description:</h3>
+        <p th:each="error : ${errors}" th:text="${error}">
+    </div>
+
+    <div id="ListErrors" th:if="${ListErrors}" class="flash-message">
+        <h3>Excel Error List:</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Branch</th>
+                <th>Year Class</th>
+                <th>Email</th>
+                <th>Mobile</th>
+            </tr>
+            <tr th:each="excel : ${ListErrors}">
+                <td th:text="${excel.Id}"></td>
+                <td th:text="${excel.name}"></td>
+                <td th:text="${excel.position}"></td>
+                <td th:text="${excel.branch}"></td>
+                <td th:text="${excel.yearClass}"></td>
+                <td th:text="${excel.email}"></td>
+                <td th:text="${excel.mobile}"></td>
+            </tr>
+        </table>
+    </div>
+
+    </form>
+</div>
+</body>
+</html>
